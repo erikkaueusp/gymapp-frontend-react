@@ -10,7 +10,7 @@ import TotaisAssinaturasPage from "./pages/TotaisAssinaturasPage";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/gymapp-frontend-react/">
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<DashboardLayout />}>

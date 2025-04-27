@@ -3,6 +3,8 @@ import { useState } from "react";
 import { getTotaisAssinaturas, TotaisResponse } from "../api/assinaturas";
 import { formatarDataBR } from "../utils/formatDate";
 import { formatarDinheiroBR } from "../utils/formatMoney";
+import { Navigate } from "react-router-dom";
+import { getRoleFromToken } from "../utils/auth";
 
 
 
@@ -13,6 +15,12 @@ const TotaisAssinaturasPage = () => {
     const [anoFim, setAnoFim] = useState("2025");
     const [resultado, setResultado] = useState<TotaisResponse | null>(null);
     const [erro, setErro] = useState("");
+    const role = getRoleFromToken();
+
+    if (role !== "ROLE_ADMINISTRADOR") {
+        return <Navigate to="/dashboard" />; // Redireciona se não for admin
+    }
+
 
     const getUltimoDiaMes = (ano: number, mes: number) => {
         return new Date(ano, mes, 0).getDate();

@@ -10,9 +10,10 @@ interface AlunoAutocompleteProps {
     label?: string;
     onSelect: (aluno: Aluno | null) => void; // agora também pode mandar null ao limpar
     placeholder?: string;
+    value?: Aluno | null;
 }
 
-const AlunoAutocomplete = ({ label = "Aluno", onSelect, placeholder = "Digite o nome do aluno..." }: AlunoAutocompleteProps) => {
+const AlunoAutocomplete = ({ label = "Aluno", onSelect, placeholder = "Digite o nome do aluno...", value }: AlunoAutocompleteProps) => {
     const [inputValue, setInputValue] = useState("");
     const [suggestions, setSuggestions] = useState<Aluno[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +38,14 @@ const AlunoAutocomplete = ({ label = "Aluno", onSelect, placeholder = "Digite o 
 
         return () => clearTimeout(delayDebounce);
     }, [inputValue]);
+
+    useEffect(() => {
+        if (value === null) {
+            setInputValue("");
+            setSelectedAluno(null);
+            setSuggestions([]);
+        }
+    }, [value]);
 
     const buscar = async () => {
         setIsLoading(true);

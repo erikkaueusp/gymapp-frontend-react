@@ -8,6 +8,7 @@ import CadastrarAlunoPage from "./pages/CadastrarAlunoPage";
 import TotaisAssinaturasPage from "./pages/TotaisAssinaturasPage";
 import AssinaturasListaPage from "./pages/AssinaturasListaPage";
 import ProximosVencimentosPage from "./pages/ProximosVencimentosPage";
+import UsuariosPage from "./pages/UsuariosPage";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="assinaturas/listar" element={<AssinaturasListaPage />} />
           <Route path="assinaturas/totais" element={<TotaisAssinaturasPage />} />
           <Route path="assinaturas/vencimentos" element={<ProximosVencimentosPage />} />
+          <Route path="/dashboard/usuarios" element={<UsuariosPage />} />
         </Route>
 
       </Routes>

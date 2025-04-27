@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import {
     Dumbbell,
     Users,
+    UserCog,
     ClipboardList,
     BarChart3,
     PlusCircle,
@@ -70,9 +71,15 @@ const DashboardLayout = () => {
 
 
                         {role === "ROLE_ADMINISTRADOR" && (
-                            <Link to="/dashboard/assinaturas/totais" className={linkClass("/dashboard/assinaturas/totais")}>
-                                <BarChart3 size={18} /> Totais
-                            </Link>
+                            <>
+                                <Link to="/dashboard/assinaturas/totais" className={linkClass("/dashboard/assinaturas/totais")}>
+                                    <BarChart3 size={18} /> Totais
+                                </Link>
+
+                                <Link to="/dashboard/usuarios" className={linkClass("/dashboard/usuarios")}>
+                                    <UserCog size={18} /> Usuários
+                                </Link>
+                            </>
                         )}
                     </nav>
                 </div>

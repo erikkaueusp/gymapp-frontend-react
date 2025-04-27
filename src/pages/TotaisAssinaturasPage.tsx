@@ -18,7 +18,7 @@ const TotaisAssinaturasPage = () => {
     const role = getRoleFromToken();
 
     if (role !== "ROLE_ADMINISTRADOR") {
-        return <Navigate to="/dashboard" />; // Redireciona se não for admin
+        return <Navigate to="/dashboard" />;
     }
 
 

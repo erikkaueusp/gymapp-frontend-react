@@ -6,7 +6,7 @@ import AssinaturasPage from "./pages/AssinaturasPage";
 import DashboardLayout from "./layouts/DashboardLayout";
 import CadastrarAlunoPage from "./pages/CadastrarAlunoPage";
 import TotaisAssinaturasPage from "./pages/TotaisAssinaturasPage";
-
+import AssinaturasListaPage from "./pages/AssinaturasListaPage"; // Corrigido o nome
 
 const App = () => {
   return (
@@ -18,6 +18,8 @@ const App = () => {
           <Route path="alunos" element={<AlunosPage />} />
           <Route path="alunos/novo" element={<CadastrarAlunoPage />} />
           <Route path="assinaturas" element={<AssinaturasPage />} />
+          <Route path="assinaturas/novo" element={<AssinaturasPage />} /> {/* Nova assinatura */}
+          <Route path="assinaturas/listar" element={<AssinaturasListaPage />} /> {/* Listar assinaturas */}
           <Route path="assinaturas/totais" element={<TotaisAssinaturasPage />} />
         </Route>
       </Routes>

@@ -8,7 +8,8 @@ import {
     PlusCircle,
     List,
     ChevronDown,
-    ChevronRight
+    ChevronRight,
+    ShieldCheck
 } from "lucide-react";
 import { useState } from "react";
 import { getRoleFromToken, logout } from "../utils/auth";
@@ -81,6 +82,9 @@ const DashboardLayout = () => {
                                 </Link>
                             </>
                         )}
+                        <Link to="/dashboard/controle" className={linkClass("/dashboard/controle")}>
+                            <ShieldCheck size={16} /> Controle
+                        </Link>
                     </nav>
                 </div>
 

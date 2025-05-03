@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAlunos, Aluno } from "../api/alunos";
-
+import { cadastrarBiometria } from "../api/biometria";
 
 const AlunosPage = () => {
 
@@ -15,7 +15,29 @@ const AlunosPage = () => {
   const [porPagina, setPorPagina] = useState(10);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState("");
+  const [biometriaCadastrada, setBiometriaCadastrada] = useState<Set<number>>(new Set());
+  const [bloqueioTemporario, setBloqueioTemporario] = useState<Set<number>>(new Set());
 
+
+  const handleCadastrarBiometria = async (idAluno: number) => {
+    try {
+      await cadastrarBiometria(idAluno);
+      const novoSet = new Set(bloqueioTemporario);
+      novoSet.add(idAluno);
+      setBloqueioTemporario(novoSet);
+
+      // remove o bloqueio após 5 segundos
+      setTimeout(() => {
+        setBloqueioTemporario((prev) => {
+          const atualizado = new Set(prev);
+          atualizado.delete(idAluno);
+          return atualizado;
+        });
+      }, 5000);
+    } catch (error) {
+      alert("Erro ao solicitar registro de biometria.");
+    }
+  };
 
   const carregarAlunos = (pagina: number) => {
     setLoading(true);
@@ -71,6 +93,7 @@ const AlunosPage = () => {
                   <th className="text-left px-4 py-2">Nome</th>
                   <th className="text-left px-4 py-2">Email</th>
                   <th className="text-left px-4 py-2">Telefone</th>
+                  <th className="text-left px-4 py-2">Biometria</th>
                   <th className="text-left px-4 py-2">Criado em</th>
                 </tr>
               </thead>
@@ -80,6 +103,20 @@ const AlunosPage = () => {
                     <td className="px-4 py-2">{aluno.nome}</td>
                     <td className="px-4 py-2">{aluno.email}</td>
                     <td className="px-4 py-2">{aluno.telefone}</td>
+                    <td className="px-4 py-2">
+                      {aluno.biometriaCadastrada ? (
+                        <span className="text-green-600 font-medium">Registrado</span>
+                      ) : (
+                        <button
+                          onClick={() => handleCadastrarBiometria(aluno.id)}
+                          className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition disabled:opacity-50"
+                          disabled={bloqueioTemporario.has(aluno.id)}
+                        >
+                          Registrar biometria
+                        </button>
+                      )}
+                    </td>
+
                     <td className="px-4 py-2 text-xs text-gray-500">
                       {new Date(aluno.dataCriacao).toLocaleString()}
                     </td>

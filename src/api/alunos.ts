@@ -23,6 +23,7 @@ export interface Aluno {
     email: string;
     telefone: string;
     dataCriacao: string;
+    biometriaCadastrada: boolean;
 }
 
 // aqui podemos refatorar o input para utilizar o Aluno, analizar se vale a pena isso dado que é usado no AlunoPageResponse

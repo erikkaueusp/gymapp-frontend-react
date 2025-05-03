@@ -9,6 +9,7 @@ import TotaisAssinaturasPage from "./pages/TotaisAssinaturasPage";
 import AssinaturasListaPage from "./pages/AssinaturasListaPage";
 import ProximosVencimentosPage from "./pages/ProximosVencimentosPage";
 import UsuariosPage from "./pages/UsuariosPage";
+import ControlePage from "./pages/ControlePage";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="assinaturas/totais" element={<TotaisAssinaturasPage />} />
           <Route path="assinaturas/vencimentos" element={<ProximosVencimentosPage />} />
           <Route path="/dashboard/usuarios" element={<UsuariosPage />} />
+          <Route path="controle" element={<ControlePage />} />
         </Route>
 
       </Routes>
